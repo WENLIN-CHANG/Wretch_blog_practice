@@ -10,7 +10,7 @@ def about(request):
     return render(request, "about.html")
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('about/', about),
     path('', home),
 ]
