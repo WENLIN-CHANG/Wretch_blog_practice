@@ -4,19 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>無名小站</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-  <nav>
-    <ul>
+  <nav class="bg-green-200 px-4 py-8">
+    <ul class="flex gap-4">
       <li><a href="{% url  'pages:home' %}">首頁</a></li>
       <li><a href="{% url  'pages:contact' %}">聯絡</a></li>
       <li><a href="{% url  'pages:about' %}">關於</a></li>
+      <li><a href="{% url  'articles:index' %}">文章</a></li>
     </ul>
-
-
   </nav>
 
-
-  {% block content %}{% endblock %}
+  <main class="container mx-auto">
+    {% block content %}{% endblock %}
+  </main>
 </body>
 </html>

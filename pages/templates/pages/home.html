@@ -1,11 +1,5 @@
-<h1>HI</h1>
+{% extends "layouts/default.html" %}
 
-
-<!-- SSR = server side render -->
-<section class="flex">
-  {% for num in lucky %}
-    <div>
-      {{ num }}
-    </div>
-  {% endfor %}
-</section>
+{% block content %}
+<h1>首頁</h1>
+{% endblock %}
