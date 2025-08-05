@@ -1,0 +1,22 @@
+{% extends "layouts/default.html" %}
+
+{% block content %}
+<a href="{% url  'articles:create' %}">新增文章</a>
+
+<form action="{% url  'articles:index' %}" method="post">
+
+    {% csrf_token %}
+    
+  <div class="flex flex-col">
+    <label>標題</label>
+    <input type="text" class="input" name="title">
+  </div>
+  <div class="flex flex-col">
+    <label>內文</label>
+    <textarea class="textarea" name="content"></textarea>
+  </div>
+  <div>
+    <button class="btn btn-success">新增文章</button>
+  </div>
+</form>
+{% endblock %}
