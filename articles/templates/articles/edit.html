@@ -1,0 +1,29 @@
+{% extends "layouts/default.html" %}
+
+{% block content %}
+
+<article>
+  編輯文章：{{ article.title }}
+</article>
+
+<form action="{% url  'articles:detail' article.id %}" 
+      method="post" 
+      class="flex flex-col gap-4">
+      <input type="hidden" name="_method" value="patch">
+
+  {% csrf_token %}
+
+  <div class="flex flex-col">
+    <label>標題</label>
+    <input type="text" class="input" name="title" value="{{ article.title }}">
+  </div>
+  <div class="flex flex-col">
+    <label>內文</label>
+    <textarea class="textarea" name="content">{{ article.content }}</textarea>
+  </div>
+  <div>
+    <button class="btn btn-success">更新文章</button>
+  </div>
+</form>
+
+{% endblock %}
