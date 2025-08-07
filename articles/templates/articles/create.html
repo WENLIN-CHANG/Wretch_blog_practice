@@ -6,7 +6,7 @@
 <form 
     action="{% url  'articles:index' %}" 
     x-data
-    @submit.prevent="confirm('確認新增文章？')"
+    @submit="confirm('確認新增文章？')"
     method="post"
     class="flex flex-col gap-4">
 

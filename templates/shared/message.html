@@ -1,9 +1,11 @@
 <!-- flash message -->
 {% if messages %}
   {% for m in messages%}
-    <div role="alert" class="alert alert-{{ m.tags }} flex space-between">
-      <span>{{ m }}</span>
-      <button class="btn btn-xs">X</button>
-    </div>
+    <template x-data="{ show: true }" x-if="true">
+    <div role="alert" class="alert alert-{{ m.tags }} flex justify-between items-center" x-show="show">
+        <span>{{ m }}</span>
+        <button @click="show = false" class="btn btn-xs">X</button>
+      </div>
+    </template>
   {% endfor %}
 {% endif %}
