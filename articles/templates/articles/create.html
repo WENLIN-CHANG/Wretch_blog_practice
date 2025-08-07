@@ -3,7 +3,12 @@
 {% block content %}
 <a href="{% url  'articles:create' %}">新增文章</a>
 
-<form action="{% url  'articles:index' %}" method="post">
+<form 
+    action="{% url  'articles:index' %}" 
+    x-data
+    @submit.prevent="confirm('確認新增文章？')"
+    method="post"
+    class="flex flex-col gap-4">
 
     {% csrf_token %}
     

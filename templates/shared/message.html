@@ -1,0 +1,9 @@
+<!-- flash message -->
+{% if messages %}
+  {% for m in messages%}
+    <div role="alert" class="alert alert-{{ m.tags }} flex space-between">
+      <span>{{ m }}</span>
+      <button class="btn btn-xs">X</button>
+    </div>
+  {% endfor %}
+{% endif %}
