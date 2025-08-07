@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Article
 
@@ -17,4 +17,5 @@ def create(request):
     return render(request, "articles/create.html")
 
 def detail(request, id):
-    return render(request, "articles/detail.html", { "id": id})
+    article = get_object_or_404(Article, pk=id)
+    return render(request, "articles/detail.html", {"article": article})
