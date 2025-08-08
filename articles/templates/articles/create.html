@@ -11,15 +11,14 @@
     class="flex flex-col gap-4">
 
     {% csrf_token %}
-    
-  <div class="flex flex-col">
-    <label>標題</label>
-    <input type="text" class="input" name="title">
-  </div>
-  <div class="flex flex-col">
-    <label>內文</label>
-    <textarea class="textarea" name="content"></textarea>
-  </div>
+
+  {% for field in form %}
+    <div class="flex flex-col">
+      {{ field.label_tag }}
+      {{ field }}
+    </div>
+  {% endfor %}
+
   <div>
     <button class="btn btn-success">新增文章</button>
   </div>
