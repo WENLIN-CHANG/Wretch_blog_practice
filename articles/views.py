@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Article
 from django.contrib import messages
 from .forms import ArticleForm
+from comments.forms import CommentForm
+from django.views.decorators.http import require_POST
 
 def index(request):
     if request.method == "POST":
@@ -36,7 +38,17 @@ def detail(request, id):
             messages.warning(request, "刪除成功")
             return redirect("articles:index")
     else:
-        return render(request, "articles/detail.html", {"article": article})
+        comment_form = CommentForm()
+        comments = article.comment_set.filter(deleted_at = None).order_by("-id")
+        return render(
+            request,
+            "articles/detail.html",
+            {
+                "article": article, 
+                "comment_form": comment_form, 
+                "comments": comments
+            },
+        )
 
 
 def edit(request, id):

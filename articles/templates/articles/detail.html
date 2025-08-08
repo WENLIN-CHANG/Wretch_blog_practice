@@ -28,4 +28,28 @@
   <article>
     {{ article.content|linebreaks }}
   </article>
+  <hr>
+  <h3>留言區</h3>
+
+  <form action="{% url 'articles:create_comment' article.id %}" method="post">
+    {% csrf_token %}
+    <div class="flex flex-col">
+      {{comment_form.content.label_tag }}
+      {{comment_form.content }}
+    </div>
+    <button class="btn btn-primary btn-sm">新增</button>
+  </form>
+
+  <ul>
+    {% for comment in comments %}
+    <li class="py-1">
+      {{ comment.content }}
+      {{ comment.created_at }}
+      <form action="{% url 'comments:delete' comment.id %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-xs btn-error">刪除</button>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
 {% endblock %}

@@ -1139,6 +1139,9 @@
   .mx-auto {
     margin-inline: auto;
   }
+  .my-2 {
+    margin-block: calc(var(--spacing) * 2);
+  }
   .modal-action {
     margin-top: calc(0.25rem * 6);
     display: flex;
@@ -1265,6 +1268,12 @@
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
   }
+  .py-1 {
+    padding-block: calc(var(--spacing) * 1);
+  }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
+  }
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
   }
@@ -1291,6 +1300,11 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
+  .btn-sm {
+    --fontsize: 0.75rem;
+    --btn-p: 0.75rem;
+    --size: calc(var(--size-field, 0.25rem) * 8);
+  }
   .btn-xs {
     --fontsize: 0.6875rem;
     --btn-p: 0.5rem;
@@ -1299,6 +1313,10 @@
   .btn-error {
     --btn-color: var(--color-error);
     --btn-fg: var(--color-error-content);
+  }
+  .btn-primary {
+    --btn-color: var(--color-primary);
+    --btn-fg: var(--color-primary-content);
   }
   .btn-success {
     --btn-color: var(--color-success);
