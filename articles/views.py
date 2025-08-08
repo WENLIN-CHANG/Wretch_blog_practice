@@ -9,8 +9,7 @@ def index(request):
         content = request.POST.get("content")
         is_published = request.POST.get("is_published")
         # 寫入 table
-        Article.objects.create(title=title, content=con
-                               tent, is_published=is_published)
+        Article.objects.create(title=title, content=content, is_published=is_published)
         messages.success(request, "新增成功")
         return redirect("articles:index")
     else:

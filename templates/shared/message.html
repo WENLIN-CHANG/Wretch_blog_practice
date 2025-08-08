@@ -1,4 +1,6 @@
-<!-- flash message -->
+{% comment %} 
+  alert-success alert-error alert-warning 保留CSS類別
+{% endcomment %}
 {% if messages %}
   {% for m in messages%}
     <template x-data="{ show: true }" x-if="true">
