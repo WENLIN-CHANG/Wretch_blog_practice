@@ -4,15 +4,17 @@ from .models import Article
 from django.contrib import messages
 
 def index(request):
-    if request.POST:
-        title = request.POST['title']
-        content = request.POST["content"]
+    if request.method == "POST":
+        title = request.POST.get('title')
+        content = request.POST.get("content")
+        is_published = request.POST.get("is_published")
         # 寫入 table
-        Article.objects.create(title=title, content=content)
+        Article.objects.create(title=title, content=con
+                               tent, is_published=is_published)
         messages.success(request, "新增成功")
         return redirect("articles:index")
     else:
-        articles = Article.objects.all().order_by("-id")
+        articles = Article.objects.order_by("-id")
         return render(request, "articles/index.html", {"articles": articles})
 
 def create(request):
@@ -23,8 +25,9 @@ def detail(request, id):
 
     if request.POST:
         if request.POST["_method"] == "patch":
-            article.title = request.POST["title"]
-            article.content = request.POST["content"]
+            article.title = request.POST.get("title")
+            article.content = request.POST.get("content")
+            article.is_published = request.POST.get("is_published") == "on"
             article.save()
 
             messages.success(request, "更新成功")
@@ -32,7 +35,7 @@ def detail(request, id):
 
         if request.POST["_method"] == "delete":
             article.delete()
-            
+
             messages.warning(request, "刪除成功")
             return redirect("articles:index")
     else:

@@ -9,7 +9,9 @@
 {% for article in articles %}
 
 <article class="mb-8">
-  <h2><a 
+  <h2>
+    {% if article.is_published %} O {% else %} X {% endif %}
+      <a 
         class="bg-red-300"
         href="{% url 'articles:detail' article.id %}">
         {{ article.title }}

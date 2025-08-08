@@ -22,6 +22,9 @@
     <textarea class="textarea" name="content">{{ article.content }}</textarea>
   </div>
   <div>
+    <input class="checkbox" type="checkbox" name="is_published" {% if article.is_published %} checked {% endif %} /> 發布文章
+  </div>
+  <div>
     <button class="btn btn-success">更新文章</button>
   </div>
 </form>
