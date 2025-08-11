@@ -1,9 +1,9 @@
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404,render
 from .forms import CommentForm
 from articles.models import Article
 from django.contrib import messages
 from comments.models import Comment
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_http_methods, require_POST
 from django.http import HttpResponse
 
 def create(request, id):
@@ -15,15 +15,15 @@ def create(request, id):
         comment.article = article
         comment.save()
 
-        messages.success(request, "新增留言成功")
-        return redirect("articles:detail", article.id)
+        # messages.success(request, "新增留言成功")
+        return render(request, "comments/comment.html", {"comment": comment})
+        # return redirect("articles:detail", article.id)
 
-
+@require_http_methods(["DELETE"])
 def delete(request, id):
-    if request.method == "DELETE":
-        comment = get_object_or_404(Comment, pk=id)
-        comment.delete()
-        # messages.warning(request, "刪除留言成功")
+    comment = get_object_or_404(Comment, pk=id)
+    comment.delete()
+    # messages.warning(request, "刪除留言成功")
 
-        return HttpResponse("")
-        # return redirect("articles:detail", comment.article_id)
+    return HttpResponse("")
+    # return redirect("articles:detail", comment.article_id)
