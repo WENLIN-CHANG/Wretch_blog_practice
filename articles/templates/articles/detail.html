@@ -42,13 +42,15 @@
 
   <ul>
     {% for comment in comments %}
-    <li class="py-1">
+    <li class="py-1" id="comment-{{ comment.id }}">
       {{ comment.content }}
       {{ comment.created_at }}
-      <form action="{% url 'comments:delete' comment.id %}" method="post">
-        {% csrf_token %}
-        <button class="btn btn-xs btn-error">刪除</button>
-      </form>
+        <button hx-delete="{% url 'comments:delete' comment.id %}" 
+                hx-target="#comment-{{ comment.id }}"
+                hx-swap="outerHTML"
+                class="btn btn-xs btn-error">
+          刪除
+        </button>
     </li>
     {% endfor %}
   </ul>
