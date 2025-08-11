@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_POST
-from django.contrib.auth import authenticate, login
+from django.views.decorators.http import require_POST, require_http_methods
+from django.contrib.auth import authenticate, login, logout as user_logout
 from django.contrib import messages
 
 def new(request):
@@ -19,4 +19,10 @@ def create(request):
     else:
         messages.error(request, "登入失敗")
         return redirect("sessions:new")
+    
+@require_http_methods(['DELETE'])
+def logout(request):
+    user_logout(request)
+    return render(request, "shared/navbar.html")
+
 
