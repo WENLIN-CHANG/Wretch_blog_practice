@@ -26,9 +26,8 @@ def create(request):
     return render(request, "articles/create.html", {"form": form})
 
 def detail(request, id):
-    article = get_object_or_404(Article, pk=id)
-
     if request.POST and request.user.is_authenticated:
+        article = get_object_or_404(Article, pk=id, user=request.user)
         if request.POST["_method"] == "patch":
             form = ArticleForm(request.POST, instance=article)
             form.save()
@@ -42,6 +41,7 @@ def detail(request, id):
             messages.warning(request, "刪除成功")
             return redirect("articles:index")
     else:
+        article = get_object_or_404(Article, pk=id)
         comment_form = CommentForm()
         comments = article.comment_set.filter(deleted_at = None).order_by("-id")
         return render(
@@ -54,8 +54,8 @@ def detail(request, id):
             },
         )
 
-
+@login_required
 def edit(request, id):
-    article = get_object_or_404(Article, pk=id)
+    article = get_object_or_404(Article, pk=id, user=request.user)
     form = ArticleForm(instance=article)
     return render(request, "articles/edit.html", {"article": article, "form": form})
