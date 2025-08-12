@@ -24,6 +24,8 @@
       <button class="btn btn-xs btn-error">刪除</button>
     </form>
   </div>
+  {% include "ui/like_bitton.html" with article=article user=user only %}
+
   <h1>Hello, {{ article.title }}</h1>
   <article>
     {{ article.content|linebreaks }}

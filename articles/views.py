@@ -63,3 +63,14 @@ def edit(request, id):
     article = get_object_or_404(Article, pk=id, user=request.user)
     form = ArticleForm(instance=article)
     return render(request, "articles/edit.html", {"article": article, "form": form})
+
+
+@require_POST
+@login_required
+def like(request, id):
+    # article = get_object_or_404(Article, pk=id)
+    # if article.favoritearticle_set.contains(request.user):
+    #     pass
+    # else:
+    #     pass
+    return HttpResponse(123)
