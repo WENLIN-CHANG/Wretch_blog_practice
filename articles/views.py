@@ -43,7 +43,11 @@ def detail(request, id):
     else:
         article = get_object_or_404(Article, pk=id)
         comment_form = CommentForm()
-        comments = article.comment_set.filter(deleted_at = None).order_by("-id")
+        comments = (
+            article.comment_set.select_related("user")
+            .filter(deleted_at = None)
+            .order_by("-id")
+            )
         return render(
             request,
             "articles/detail.html",
