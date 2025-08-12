@@ -5,11 +5,14 @@ from django.contrib import messages
 from .forms import ArticleForm
 from comments.forms import CommentForm
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
 def index(request):
-    if request.method == "POST":
+    if request.method == "POST" and request.user.is_authenticated:
         form = ArticleForm(request.POST)
-        form.save()
+        article = form.save(commit=False)
+        article.user = request.user
+        article.save()
 
         messages.success(request, "新增成功")
         return redirect("articles:index")
@@ -17,6 +20,7 @@ def index(request):
         articles = Article.objects.order_by("-id")
         return render(request, "articles/index.html", {"articles": articles})
 
+@login_required
 def create(request):
     form = ArticleForm()
     return render(request, "articles/create.html", {"form": form})
@@ -24,7 +28,7 @@ def create(request):
 def detail(request, id):
     article = get_object_or_404(Article, pk=id)
 
-    if request.POST:
+    if request.POST and request.user.is_authenticated:
         if request.POST["_method"] == "patch":
             form = ArticleForm(request.POST, instance=article)
             form.save()
