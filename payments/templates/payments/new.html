@@ -1,0 +1,7 @@
+{% extends "layouts/user.html" %}
+
+{% block content %}
+<h1>付款：方案 {{ plan|upper }} </h1>
+
+<div x-data="braintree_payment_form" id="payment-container"></div>
+{% endblock %}

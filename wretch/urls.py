@@ -10,4 +10,5 @@ urlpatterns = [
     path("comments/", include("comments.urls")),
     path("users/", include("users.urls")),
     path("sessions/", include("sessions.urls")),
+    path("payments/", include("payments.urls")),
 ] + debug_toolbar_urls()

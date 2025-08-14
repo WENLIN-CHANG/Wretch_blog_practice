@@ -6928,12 +6928,26 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
   });
 
+  // src/scripts/braintree.js
+  var BrainTreePayment;
+  var init_braintree = __esm({
+    "src/scripts/braintree.js"() {
+      BrainTreePayment = () => ({
+        init: function() {
+          console.log("hello");
+        }
+      });
+    }
+  });
+
   // src/scripts/app.js
   var require_app = __commonJS({
     "src/scripts/app.js"() {
       init_module_esm();
       init_htmx_esm();
+      init_braintree();
       window.Alpine = module_default;
+      module_default.data("braintree_payment_form", BrainTreePayment);
       module_default.start();
     }
   });

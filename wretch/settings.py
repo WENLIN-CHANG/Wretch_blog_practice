@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "users",
     "sessions.apps.SessionsConfig",
     "debug_toolbar",
+    "payments",
 ]
 
 LOGIN_URL = "/sessions/"
