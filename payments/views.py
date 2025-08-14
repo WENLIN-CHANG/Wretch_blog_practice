@@ -4,6 +4,10 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 PLAN_PRICE = {
@@ -39,7 +43,6 @@ def index(request):
     )
 
     if result.is_success:
-
         messages.success(request, "交易完成")
     else:
         messages.error(request, "交易錯誤")
@@ -51,8 +54,8 @@ def gateway():
     return braintree.BraintreeGateway(
         braintree.Configuration(
             environment=braintree.Environment.Sandbox,
-            merchant_id="",
-            public_key="",
-            private_key="",
+            merchant_id=os.getenv("merchant_id"),
+            public_key=os.getenv("public_key"),
+            private_key=os.getenv("private_key"),
         )
     )
