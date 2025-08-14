@@ -43,6 +43,7 @@ def index(request):
     )
 
     if result.is_success:
+        # request.user.pay(plan=plan)
         messages.success(request, "交易完成")
     else:
         messages.error(request, "交易錯誤")
