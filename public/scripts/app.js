@@ -24018,6 +24018,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       BrainTreePaymentForm = () => ({
         instance: null,
         ableToSubmit: false,
+        nonce: "",
         async init() {
           const token = this.$el.dataset.token;
           this.instance = await import_braintree_web_drop_in.default.create({
@@ -24026,8 +24027,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           });
           this.ableToSubmit = true;
         },
-        onSubmit() {
-          console.log(this.instance);
+        async onSubmit() {
+          this.ableToSubmit = false;
+          const { nonce } = await this.instance.requestPaymentMethod();
+          if (nonce) {
+            this.nonce = nonce;
+            this.$nextTick(() => {
+              this.$el.submit();
+            });
+          }
         }
       });
     }

@@ -3,6 +3,7 @@ import dropin from "braintree-web-drop-in"
 const BrainTreePaymentForm = () =>({
   instance: null,
   ableToSubmit: false,
+  nonce: "",
 
   async init(){
     const token = this.$el.dataset.token
@@ -15,8 +16,15 @@ const BrainTreePaymentForm = () =>({
     this.ableToSubmit = true
   },
 
-  onSubmit(){
-    console.log(this.instance);
+  async onSubmit(){
+    this.ableToSubmit = false
+    const { nonce } = await this.instance.requestPaymentMethod()
+    if(nonce){
+      this.nonce = nonce
+      this.$nextTick(() => {
+        this.$el.submit()
+      })
+    }
   },
 
 
